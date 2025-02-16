@@ -1,0 +1,148 @@
+/* .results-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #e4dede;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 50px auto;
+  }
+  
+  .result-score {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .score-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #d9534f;
+  }
+  
+  .analysis-text {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+ */
+
+
+
+
+   /* --------------------------- */
+
+
+.results-container {
+  padding: 40px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  color: #2b2e4a; /* Modern dark color for text */
+  font-family: 'Poppins', sans-serif; /* Sleeker font */
+}
+
+h1 {
+  font-size: 36px;
+  color: #2b2e4a;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.result-score {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #6a0572; /* Vibrant color for emphasis */
+}
+
+.score-value {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff6f61; /* Stand-out color for the score */
+}
+
+.analysis-text {
+  font-size: 20px;
+  margin: 20px 0;
+  line-height: 1.8;
+  color: #2b2e4a;
+}
+
+h2 {
+  font-size: 26px;
+  width: 80%;
+  color: #6a0572;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  border-bottom: 2px solid #ff6f61;
+  padding-bottom: 10px;
+}
+
+hr {
+  width: 80%;
+  /* border: none; */
+  height: 1px;
+  background-color: #ff6f61;
+  margin: 30px auto;
+  border-bottom: 2px solid #ff6f61;  /* Accent border */
+}
+
+/* Adding card style for clarity */
+.section {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-10px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .results-container {
+    padding: 30px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .result-score {
+    font-size: 24px;
+  }
+
+  .score-value {
+    font-size: 38px;
+  }
+}
+
+
+/* ------------ */
+
+
+.recommended-actions-list {
+  list-style-type: disc; /* Bullet points */
+  margin: 20px 0;
+  padding-left: 20px; /* Indent the list */
+  text-align: left; /* Align text to the left */
+}
+
+.recommended-actions-list li {
+  font-size: 18px;
+  color: #2b2e4a;
+  margin-bottom: 10px; /* Spacing between list items */
+  line-height: 1.6; /* Adjust line height for readability */
+}
+

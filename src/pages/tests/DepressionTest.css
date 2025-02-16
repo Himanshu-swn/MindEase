@@ -1,0 +1,154 @@
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7fafd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #006e81;
+}
+
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+} 
+
+.progress-bar {
+    width: 100%;
+    height: 6rem;
+    background-color: #e0e0e054;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+/* .step {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-radius: 5px;
+    margin: 0 5px;
+    color: #006e81;
+} */
+
+/* .step.active {
+    background-color: #00acc1;
+    color: white;
+} */
+
+.form-instructions {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #555;
+}
+
+.depression-form .question-block {
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.option-button {
+    flex-grow: 1;
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #00acc1;
+    border-radius: 20px; 
+    background-color: white;
+    color: #00acc1;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.option-button.selected {
+    background-color: #00acc1;
+    color: white;
+}
+
+.option-button:hover {
+    background-color: #e0f7fa;
+}
+
+.next-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #00acc1;
+
+    border:1px solid #00acc1 ;
+    color : #00acc1;
+    font-weight: 800;
+
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #007c91;
+    color: white;
+    font-size: 1.2rem;
+}
+
+
+
+/* -----------below is progression bar  */
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #0b4d61;
+    font-weight: normal;
+    font-size: 0.9rem;
+    margin: 0 10px;
+}
+
+.step.active {
+    font-weight: bold;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #cfeff5;
+    border: 3px solid #0b4d61;
+    margin-bottom: 5px;
+}
+
+.step.active .circle {
+    background-color: #18a5af;
+}
+
+.line {
+    width: 60px;
+    height: 3px;
+    background-color: #0b4d61;
+}

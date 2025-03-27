@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/Signup";
 // import ProjectedRoute from "./ProjectedRoute";
 // import DoctorDetails from "../pages/Doctors/DoctorDetails";
+import VideoChat from "../components/VideoChat/VideoChat";
 import Services from "../pages/Services";
 import Depression from "../pages/tests/Depression"
 import Anxiety from "../pages/tests/Anxiety"
@@ -26,8 +27,8 @@ const Routers = () => {
       <Route path="/test/ptsd" element={<PTSDTest />} />
       <Route path="/results" element={<ResultsPage />} />
 
-      {/* <Route path="/doctors/:id" element={<DoctorDetails />} />
-      <Route path="/video_chat" element={<VideoChat />} /> */}
+      {/* <Route path="/doctors/:id" element={<DoctorDetails />} /> */}
+      <Route path="/video_chat" element={<VideoChat />} />
     </Routes>
   );
 };

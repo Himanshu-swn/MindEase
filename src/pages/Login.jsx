@@ -27,23 +27,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-
+  
     try {
       const res = await fetch(`${BASE_URL}/auth/login`, {
-        method: "post",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-
-      const result = await res.data;
-      if (!res.data.isOk) {
-        throw new Error(result.message);
+  
+      const result = await res.json();
+      console.log(result);
+  
+      if (!res.ok) { 
+        throw new Error(result.message || "Something went wrong");
       }
-
+  
+      localStorage.setItem("userId", result.data._id);
+      
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: {
@@ -53,12 +56,14 @@ const Login = () => {
         },
       });
 
+  
       setLoading(false);
-      toast(result.message);
+      toast.success(result.message);
       navigate("/home");
     } catch (error) {
-      toast(error);
-    } finally{    
+      console.error(error);
+      toast.error(error.message || "Login failed");
+    } finally {
       setLoading(false);
     }
   };

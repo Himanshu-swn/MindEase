@@ -1,77 +1,34 @@
-// /* eslint-disable react/prop-types */
-
-// import convertTime from "../../utils/convertTime";
-// import { BASE_URL, token } from "../../config";
-
-// const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
-//   const bookingHandler = async () => {
-//     try {
-//       const res = await fetch(
-//         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
-//         {
-//           method: "post",
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-
-//       const data = await res.json();
-
-//       if (data.session.url) {
-//         window.location.href = data.session.url;
-//       }
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-//   return (
-//     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md ">
-//       <div className="flex items-center justify-between">
-//         <p className="text__para mt-0 font-semibold">Booking price</p>
-//         <span className="text-[16px] leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold">
-//           AU $ {ticketPrice}
-//         </span>
-//       </div>
-
-//       <div className="mt-[30px]">
-//         <p className="text-para mt-0 font-semibold text-headingColor">
-//           Available Time:
-//         </p>
-
-//         <ul className="mt-3">
-//           {timeSlots?.map((item, index) => (
-//             <li key={index} className="flex items-center justify-between mb-2">
-//               <p className="text-[15px] leading-6 text-textColor font-semibold">
-//                 {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
-//               </p>
-//               <p className="text-[15px] leading-6 text-textColor font-semibold">
-//                 {convertTime(item.startingTime)} -{convertTime(item.endingTime)}
-//               </p>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-
-//       <button onClick={bookingHandler} className="btn px-2 w-full rounded-md">
-//         Book Appointment
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default SidePanel;
-
-
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import { useNavigate } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import  peerService  from "../../services/peerService"; 
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointment, setAppointment] = useState(null);
+  const [meetingId, setMeetingId] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
+  const [error, setError] = useState('');
+  const userId = localStorage.getItem('userId') || "Not available";
+
+  const navigate = useNavigate();
+
+  const handleCreateMeeting = async () => {
+    try {
+      setIsCreating(true);
+      setError('');
+      const newMeetingId = await peerService.createMeeting({ doctorId, userId, selectedDate });
+      navigate(`/meeting/${newMeetingId}`);
+    } catch (err) {
+      setError('Failed to create meeting. Please try again.');
+      console.error(err);
+    } finally {
+      setIsCreating(false);
+    }
+  };
 
   const bookingHandler = () => {
     setShowModal(true);
@@ -113,12 +70,13 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
           >
             ❌
           </button>
-          <Link
-          to="/video_chat">
-          <button className="mt-4 w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+
+          {/* <Link
+            to={`/meeting/${newMeetingId}`}> */}
+          <button onClick={handleCreateMeeting} className="mt-4 w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
             Navigate to Next Step
           </button>
-          </Link>
+          {/* </Link> */}
         </div>
       ) : (
         <button

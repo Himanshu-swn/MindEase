@@ -22,7 +22,6 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
     try {
       setIsCreating(true);
       setError('');
-      const newMeetingId = await peerService.createMeeting({ doctorId, userId, selectedDate });
       navigate(`/meeting/${newMeetingId}`);
     } catch (err) {
       setError('Failed to create meeting. Please try again.');
@@ -40,8 +39,9 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
     setSelectedDate(date);
   };
 
-  const confirmBooking = () => {
+  const confirmBooking = async () => {
     setAppointment(selectedDate);
+    await peerService.createMeeting({ doctorId, userId, selectedDate });
     setShowModal(false);
   };
 
@@ -119,8 +119,10 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
               onChange={handleDateSelect}
               showTimeSelect
               dateFormat="Pp"
+              placeholderText="Pick a date"
               className="w-full p-3 border border-gray-300 rounded-md"
             />
+
             <div className="flex justify-end mt-6 space-x-3">
               <button
                 onClick={() => setShowModal(false)}

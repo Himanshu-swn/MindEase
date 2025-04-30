@@ -51,7 +51,7 @@ const Appointments = () => {
 
   return (
     <section className="p-6 max-w-4xl mx-auto pt-[100px]">
-      <h2 className="text-2xl font-semibold mb-4">Your Appointments</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-lime-500">Your Appointments</h2>
       <div className="grid gap-4">
         {appointments.map((appointment) => {
           const upcoming = isUpcoming(appointment);

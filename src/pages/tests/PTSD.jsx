@@ -15,15 +15,15 @@ const PTSDTest = () => {
   ];
 
   const optionsList = [
-    { options: ["Never", "Rarely", "Sometimes", "Frequently"], scores: [3, 1, 0, -2] }, // Q1
-    { options: ["Never", "Occasionally", "Frequently", "Almost Always"], scores: [3, 1, 0, -2] }, // Q2
-    { options: ["Fully Connected", "Slightly Detached", "Moderately Detached", "Completely Numb"], scores: [3, 1, 0, -2] }, // Q3
-    { options: ["Always Sleep Well", "Occasional Sleep Trouble", "Frequent Sleep Trouble", "Constant Insomnia"], scores: [3, 1, 0, -2] }, // Q4
-    { options: ["Never Startled", "Sometimes Startled", "Often Startled", "Constantly Jumpy"], scores: [3, 1, 0, -2] }, // Q5
-    { options: ["No Reaction", "Mild Reaction", "Strong Reaction", "Intense Reaction"], scores: [3, 1, 0, -2] }, // Q6
-    { options: ["No Loss of Interest", "Slight Loss", "Moderate Loss", "Complete Loss of Interest"], scores: [3, 1, 0, -2] } // Q7
+    { options: ["Never", "Rarely", "Sometimes", "Frequently"], scores: [0, 2, 3 , 5] }, // Q1
+    { options: ["Never", "Occasionally", "Frequently", "Almost Always"], scores:[0, 2, 3 , 5] }, // Q2
+    { options: ["Fully Connected", "Slightly Detached", "Moderately Detached", "Completely Numb"], scores:[0, 2, 3 , 4] }, // Q3
+    { options: ["Always Sleep Well", "Occasional Sleep Trouble", "Frequent Sleep Trouble", "Constant Insomnia"], scores: [0, 2, 3 , 4] }, // Q4
+    { options: ["Never Startled", "Sometimes Startled", "Often Startled", "Constantly Jumpy"], scores: [0, 2, 3 , 4] }, // Q5
+    { options: ["No Reaction", "Mild Reaction", "Strong Reaction", "Intense Reaction"], scores:[0, 2, 3 , 4]}, // Q6
+    { options: ["No Loss of Interest", "Slight Loss", "Moderate Loss", "Complete Loss of Interest"], scores: [0, 2, 3 , 4] } // Q7
   ];
-
+  
   const handleCloseModal = () => {
     setShowModal(false);
   };

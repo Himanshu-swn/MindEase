@@ -19,18 +19,17 @@ const DepressionTest = () => {
   ];
 
   const optionsList = [
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [1, 0, -1, -2] },
-    { options: ["Not difficult at all", "Somewhat difficult", "Very difficult", "Extremely difficult"], scores: [1, 0, -1, -2] }
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not at all", "Several days", "More than half the days", "Nearly every day"], scores: [0, 1, 2, 3] },
+    { options: ["Not difficult at all", "Somewhat difficult", "Very difficult", "Extremely difficult"], scores: [0, 1, 2, 3] }
   ];
-
 
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [showModal, setShowModal] = useState(false);
@@ -43,13 +42,11 @@ const DepressionTest = () => {
   const [anxietyAttackRisk, setAnxietyAttackRisk] = useState('');
   const [recommendedActions, setRecommendedActions] = useState([]);
 
-
-    const handleCloseModal = () => {
+  const handleCloseModal = () => {
     setShowModal(false);
   };
 
-
-    const handleAnalysisComplete = () => {
+  const handleAnalysisComplete = () => {
     setShowLoader(false);
     setShowResult(true);
   };
@@ -62,67 +59,66 @@ const DepressionTest = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (answers.includes(null)) {
       setShowModal(true);
       return;
     }
-  
+
     let calculatedScore = 0;
     let stabilityScore = 0;
     let anxietyRiskScore = 0;
-  
+
     answers.forEach((answerIndex, questionIndex) => {
-      if (answerIndex !== null) {
-        const score = optionsList[questionIndex].scores[answerIndex];
-        calculatedScore += score;
-  
-        if (questionIndex <= 4) {
-          stabilityScore += score;
-        }
-  
-        if (questionIndex >= 5 && questionIndex <= 8) {
-          anxietyRiskScore += score;
-        }
+      const score = optionsList[questionIndex].scores[answerIndex];
+      calculatedScore += score;
+
+      if (questionIndex <= 4) {
+        stabilityScore += score;
+      }
+
+      if (questionIndex >= 5 && questionIndex <= 8) {
+        anxietyRiskScore += score;
       }
     });
-  
+
     let calculatedAnalysis = "";
-    if (calculatedScore >= 5) {
-      calculatedAnalysis = "You seem to be experiencing mild or no depression.";
-    } else if (calculatedScore >= 0) {
+    if (calculatedScore <= 4) {
+      calculatedAnalysis = "You seem to be experiencing minimal or no depression.";
+    } else if (calculatedScore <= 9) {
+      calculatedAnalysis = "You may be experiencing mild depression.";
+    } else if (calculatedScore <= 14) {
       calculatedAnalysis = "You may be experiencing moderate depression.";
     } else {
       calculatedAnalysis = "You may be experiencing severe depression. Consider reaching out to a healthcare provider.";
     }
-  
-let stabilityAnalysis = "";
-if (stabilityScore >= 3) {
-  stabilityAnalysis = "Stable";
-} else if (stabilityScore >= 0) {
-  stabilityAnalysis = "Unstable";
-} else {
-  stabilityAnalysis = "Highly Unstable";
-}
 
-let anxietyRiskAnalysis = "";
-if (anxietyRiskScore >= 3) {
-  anxietyRiskAnalysis = "Low";
-} else if (anxietyRiskScore >= 0) {
-  anxietyRiskAnalysis = "Moderate";
-} else {
-  anxietyRiskAnalysis = "High";
-}
+    let stabilityAnalysis = "";
+    if (stabilityScore <= 4) {
+      stabilityAnalysis = "Stable";
+    } else if (stabilityScore <= 9) {
+      stabilityAnalysis = "Unstable";
+    } else {
+      stabilityAnalysis = "Highly Unstable";
+    }
 
+    let anxietyRiskAnalysis = "";
+    if (anxietyRiskScore <= 4) {
+      anxietyRiskAnalysis = "Low";
+    } else if (anxietyRiskScore <= 9) {
+      anxietyRiskAnalysis = "Moderate";
+    } else {
+      anxietyRiskAnalysis = "High";
+    }
 
-let recommendedActionsAnalysis = [];
-if (calculatedScore >= 5) {
-  recommendedActionsAnalysis = ["Maintain your routine", "Keep a positive attitude", "Stay physically active"];
-} else if (calculatedScore >= 0) {
-  recommendedActionsAnalysis = ["Relax and take breaks", "Practice mindfulness", "Engage in light activities"];
-} else {
-  recommendedActionsAnalysis = ["Seek help from a professional", "Talk to someone you trust", "Consider therapy"];
-}
+    let recommendedActionsAnalysis = [];
+    if (calculatedScore <= 4) {
+      recommendedActionsAnalysis = ["Maintain your routine", "Keep a positive attitude", "Stay physically active"];
+    } else if (calculatedScore <= 9) {
+      recommendedActionsAnalysis = ["Relax and take breaks", "Practice mindfulness", "Engage in light activities"];
+    } else {
+      recommendedActionsAnalysis = ["Seek help from a professional", "Talk to someone you trust", "Consider therapy"];
+    }
 
     setTotalScore(calculatedScore);
     setAnalysis(calculatedAnalysis);
@@ -172,9 +168,9 @@ if (calculatedScore >= 5) {
                       type="button"
                       key={optionIndex}
                       className={`option-button px-5 py-3 rounded-lg border text-gray-700 transition duration-300 text-lg 
-                    ${answers[questionIndex] === optionIndex 
-                      ? 'bg-orange-500 text-white border-orange-600' 
-                      : 'bg-gray-100 hover:bg-orange-100 border-gray-300'}`}
+                        ${answers[questionIndex] === optionIndex
+                          ? 'bg-orange-500 text-white border-orange-600'
+                          : 'bg-gray-100 hover:bg-orange-100 border-gray-300'}`}
                       onClick={() => handleOptionClick(questionIndex, optionIndex)}
                     >
                       {option}
@@ -196,5 +192,5 @@ if (calculatedScore >= 5) {
     </div>
   );
 };
-  
-  export default DepressionTest;
+
+export default DepressionTest;

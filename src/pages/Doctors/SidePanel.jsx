@@ -9,12 +9,12 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointment, setAppointment] = useState(null);
-  const [meetingId, setMeetingId] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId') || "Not available";
   const role = localStorage.getItem('role');
+  const [meetingId, setMeetingId] = useState(null);
 
   if (role !== 'patient') return null;
 
@@ -22,7 +22,7 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
     try {
       setIsCreating(true);
       setError('');
-      navigate(`/meeting/${newMeetingId}`);
+      navigate(`/meeting/${meetingId}`);
     } catch (err) {
       setError('Failed to create meeting. Please try again.');
       console.error(err);
@@ -41,7 +41,8 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
 
   const confirmBooking = async () => {
     setAppointment(selectedDate);
-    await peerService.createMeeting({ doctorId, userId, selectedDate });
+    const newMeetingId = await peerService.createMeeting({ doctorId, userId, selectedDate });
+    setMeetingId(newMeetingId);
     setShowModal(false);
   };
 

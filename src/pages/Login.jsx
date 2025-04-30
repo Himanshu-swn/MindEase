@@ -1,9 +1,10 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { BASE_URL } from "../config";
-import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from "../context/AuthContext.jsx";
+
 
 import HashLoader from "react-spinners/HashLoader";
 
@@ -58,7 +59,7 @@ const Login = () => {
 
   
       setLoading(false);
-      toast.success(result.message);
+      toast.success("Login successful");
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -71,7 +72,6 @@ const Login = () => {
   return (
     <section className="px-5 md:px-0">
       <div className=" w-full max-w-[570px] mx-auto rounded-lg shadow-lg md:p-10">
-        <ToastContainer />
         <div>
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello! <span className="text-lime-500">Welcome</span>

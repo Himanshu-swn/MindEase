@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, Link, useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../../assets/images/illness.png";
 import "../../assets/css/header.css";
 
@@ -56,9 +57,9 @@ const Header = () => {
 
       localStorage.removeItem("userId");
       localStorage.removeItem("token");
-
+      
       dispatch({ type: "LOGOUT" });
-
+      
       toast.success("Logged out successfully");
       navigate("/login");
     } catch (error) {
@@ -71,7 +72,7 @@ const Header = () => {
 
 
   return (
-    <header className="header flex items-center h-25">
+    <header className="header flex items-center h-20 fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-all">
       <div className="container">
         <div className="flex items-center justify-between">
           {/* logo */}
@@ -105,18 +106,13 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {token && user ? (
               <div className="flex items-center gap-4">
-                <Link to={`${role === "doctor"
-                    ? "/doctors/profile/me"
-                    : "/users/profile/me"
-                  }`}>
-                  {user?.photo ? (
-                    <figure className="w-[35px] h-[35px] rounded-full">
-                      <img src={user?.photo} alt="" className="w-full rounded-full" />
-                    </figure>
-                  ) : (
-                    <h3>{user?.name}</h3>
-                  )}
-                </Link>
+                {user?.photo ? (
+                  <figure className="w-[35px] h-[35px] rounded-full">
+                    <img src={user?.photo} alt="" className="w-full rounded-full" />
+                  </figure>
+                ) : (
+                  <h3>{role === "doctor" ? `Dr. ${user?.name}` : user?.name}</h3>
+                )}
 
                 <button
                   onClick={handleLogout}

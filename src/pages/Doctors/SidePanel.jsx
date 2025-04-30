@@ -12,9 +12,11 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   const [meetingId, setMeetingId] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState('');
-  const userId = localStorage.getItem('userId') || "Not available";
-
   const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || "Not available";
+  const role = localStorage.getItem('role');
+
+  if (role !== 'patient') return null;
 
   const handleCreateMeeting = async () => {
     try {

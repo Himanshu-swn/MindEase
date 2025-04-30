@@ -6,11 +6,10 @@ const layout = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="pt-20">
         <Routers />
       </main>
-
-      <Footer />
+      <Footer className="bg-gray-200 py-4 text-center"/>
     </>
   );
 };

@@ -66,7 +66,7 @@ const DoctorList = () => {
   const doctors = [
       {
         _id: "65dbfae83a28621a9914e5c9",
-        name: "Dr. David Poii  ii",
+        name: "Dr. David",
         specialization: "Psychiatrist",
         role: "doctor",
         bio: "Dr. David P is a board-certified psychiatrist specializing in the diagnosis and treatment of mental health disorders, including anxiety, depression, and PTSD. With extensive training and experience in both clinical practice and research, Dr. David is dedicated to providing personalized care to his patients. He believes in a holistic approach to mental health, integrating the latest advancements in psychiatric treatment with compassionate patient-centered care. Dr. David is committed to staying at the forefront of psychiatry through ongoing research and collaboration with colleagues in the field.",
@@ -107,7 +107,7 @@ const DoctorList = () => {
       },
       {
         _id: "65ed0a8fd255ccf40b23d6d1",
-        name: "Dr. Bryan G",
+        name: "Dr. Bryan",
         specialization: "Mental Health Specialist",
         role: "doctor",
         bio: "Dr. Bryan G is a mental health specialist with a focus on treating complex mental health issues such as bipolar disorder, schizophrenia, and addiction. With a compassionate approach and evidence-based treatments, Dr. Bryan provides his patients with comprehensive care tailored to their unique needs. He is committed to advancing mental health care by staying informed of the latest research and applying innovative therapies in his practice.",
@@ -153,8 +153,7 @@ const DoctorList = () => {
       },
       {
         _id: "65ed0a8fd255ccf40b23d6d5",
-        // name: "Dr. Bryan G" ,
-        name: "Dr. Moogli Singh",
+        name: "Dr. Moogli",
         specialization: "Mental Health Specialist",
         role: "doctor",
         bio: "Dr. Bryan G is a mental health specialist with a focus on treating complex mental health issues such as bipolar disorder, schizophrenia, and addiction. With a compassionate approach and evidence-based treatments, Dr. Bryan provides his patients with comprehensive care tailored to their unique needs. He is committed to advancing mental health care by staying informed of the latest research and applying innovative therapies in his practice.",

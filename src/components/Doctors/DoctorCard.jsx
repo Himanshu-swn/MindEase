@@ -5,9 +5,6 @@ import { BsArrowRight } from "react-icons/bs";
 
 const DoctorCard = ({ doctor }) => {
 
-  console.log("hey");
-  // console.log(doctor)
-
   const {
     name,
     avgRating,
@@ -17,8 +14,6 @@ const DoctorCard = ({ doctor }) => {
     // experiences,
   } = doctor;
 
-  // console.log(doctor)
-  console.log("oui helo yr ");
   return (
     <div className="p-3 lg:p-5">
       <div>

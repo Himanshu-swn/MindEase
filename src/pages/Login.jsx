@@ -2,11 +2,12 @@ import React from "react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { BASE_URL } from "../config";
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from "../context/AuthContext.jsx";
 
 import HashLoader from "react-spinners/HashLoader";
-import axios from "axios";
 
-const BASE_URL = "http://localhost:7000";
+const BASE_URL = "http://localhost:5000";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // const { dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,48 +27,51 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
+  
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await res.json();
+      console.log(result);
+  
+      if (!res.ok) { 
+        throw new Error(result.message || "Something went wrong");
+      }
+  
+      localStorage.setItem("userId", result.data._id);
+      
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          user: result.data,
+          token: result.token,
+          role: result.role,
+        },
+      });
 
-    // try {
-    //   // const res = await fetch(`${BASE_URL}/auth/login`, {
-    //   //   method: "post",
-    //   //   headers: {
-    //   //     "Content-Type": "application/json",
-    //   //   },
-    //   //   body: JSON.stringify(formData),
-    //   // });
-
-    //   // const res = await axios.post(`${BASE_URL}/login`, formData);
-    //   // // alert("yes yes yes yes y ");
-    //   // const result = await res.data;
-    //   // if (!res.data.isOk) {
-    //   //   throw new Error(result.message);
-    //   // }
-
-    //   dispatch({
-    //     type: "LOGIN_SUCCESS",
-    //     payload: {
-    //       user: result.userData,
-    //       token: "lk765l&$%^J;7457$%J2457;$J&#$^%&",
-    //       role: "Pakistani",
-    //     },
-    //   });
-
-    //   setLoading(false);
-    //   // alert("yes yes yes yes y ");
-    //   toast.success(result.message);
-    //   navigate("/home");
-    // } catch (error) {
-    //   // alert("no catch no ");
-    //   toast.error(error.message);
-    //   setLoading(false);
-    // }
+  
+      setLoading(false);
+      toast.success(result.message);
+      navigate("/home");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <section className="px-5 md:px-0">
       <div className=" w-full max-w-[570px] mx-auto rounded-lg shadow-lg md:p-10">
+        <ToastContainer />
         <div>
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello! <span className="text-lime-500">Welcome</span>

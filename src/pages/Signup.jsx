@@ -1,20 +1,12 @@
-// import React from "react";
+import React, { useState, useEffect } from "react";
 import signupImg from "../assets/images/signup.gif";
-
-// import { Link, useNavigate } from "react-router-dom";
-// import { useState } from "react";
-
-// import { BASE_URL } from "../config";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-// import '../assets/css/RegiForm.css';
 
-import axios from "axios";
-
-const BASE_URL = "http://localhost:7000";
+// import { BASE_URL } from "../config";
+const BASE_URL = "http://localhost:5000";
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,70 +18,54 @@ const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    // gender: "",
-    // role: "patient",
-    // photo: selectedFile,
+    gender: "",
+    role: "patient",
+    photo: selectedFile,
   });
 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    // const { name, value } = e.target;
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  // const handleFileInputChange = async (event) => {
-  //   const file = event.target.files[0];
+  const handleFileInputChange = async (event) => {
+    const file = event.target.files[0];
 
-  //   const data = await uploadImageToCloudinary(file);
+    const data = await uploadImageToCloudinary(file);
 
-  //   setSelectedFile(data.url);
-  //   setPreviewURL(data.url);
-  //   setFormData({ ...formData, photo: data.url });
-  // };
+    setSelectedFile(data.url);
+    setPreviewURL(data.url);
+    setFormData({ ...formData, photo: data.url });
+  };
 
+ 
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // try {
-    //   const res = await fetch(`${BASE_URL}/auth/register`, {
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   const { message } = await res.json();
-
-    //   if (res.status === 400) {
-    //     throw new Error(message);
-    //   }
-
     try {
-      if (formData.password === formData.confirmPassword) {
-        const response = await axios.post(`${BASE_URL}/regis`, formData);
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-        console.log("Success:", response.data);
+      const { message } = await res.json();
 
-        setLoading(false);
-        if (response.data.isOk) {
-          toast.success(response.data.message);
-          navigate("/login");
-        } else {
-          throw new Error(response.data.message);
-        }
-      } else {
-        let msg = "Password not Matched";
-        toast.error(msg);
+      if (res.status === 400) {
+        throw new Error(message);
       }
+
       setLoading(false);
+      toast.success(message);
+      navigate("/login");
     } catch (error) {
-      // alert("error regi ");
       toast.error(error.message);
       setLoading(false);
     }
@@ -160,7 +136,7 @@ const Signup = () => {
                 />
               </div>
 
-              {/* <div className="mb-5 flex items-center justify-between">
+              <div className="mb-5 flex items-center justify-between">
                 <label className="text-headingColor font-bold text-[16px] leading-7">
                   Are you a:
                   <select
@@ -187,9 +163,9 @@ const Signup = () => {
                     <option value="female">Female</option>
                   </select>
                 </label>
-              </div> */}
+              </div>
 
-              {/* <div className="mb-5 flex items-center gap-3">
+              <div className="mb-5 flex items-center gap-3">
                 {selectedFile && (
                   <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-lime-500 flex items-center">
                     <img
@@ -216,7 +192,7 @@ const Signup = () => {
                     {selectedFile ? selectedFile.name : "Upload photo"}
                   </label>
                 </div>
-              </div> */}
+              </div>
 
               <div className="mt-7">
                 <button

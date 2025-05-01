@@ -19,7 +19,8 @@ const Appointments = () => {
         return;
       }
 
-      const endpoint = role === "doctor" ? "/bookings/doctor" : "/bookings/user";
+      const endpoint =
+        role === "doctor" ? "/bookings/doctor" : "/bookings/user";
       const url = `http://localhost:5000${endpoint}?id=${userId}`;
 
       const res = await axios.get(url);
@@ -32,7 +33,9 @@ const Appointments = () => {
   };
 
   const isUpcoming = (appointment) => {
-    const appointmentDateTime = new Date(`${appointment.date}T${appointment.time}`);
+    const appointmentDateTime = new Date(
+      `${appointment.date}T${appointment.time}`
+    );
     return new Date() < appointmentDateTime;
   };
 
@@ -47,7 +50,8 @@ const Appointments = () => {
   }, []);
 
   if (loading) return <p className="text-center">Loading appointments...</p>;
-  if (!appointments.length) return <p className="text-center">No appointments found.</p>;
+  if (!appointments.length)
+    return <p className="text-center">No appointments found.</p>;
 
   return (
     <section className="p-6 max-w-4xl mx-auto pt-[100px]">
@@ -65,21 +69,33 @@ const Appointments = () => {
                 ${!upcoming ? "cursor-not-allowed opacity-80" : ""}`}
             >
               {/* Status indicator bar */}
-              <div className={`absolute left-0 top-0 h-full w-2 ${statusColor} rounded-l`} />
+              <div
+                className={`absolute left-0 top-0 h-full w-2 ${statusColor} rounded-l`}
+              />
 
-              <p><strong>Meeting ID:</strong> {appointment.meetingId}</p>
               <p>
+                <strong>Meeting ID:</strong> {appointment.meetingId}
+              </p>
+              <p> 
                 <strong>{role === "doctor" ? "Patient" : "Doctor"}:</strong>{" "}
                 {role === "doctor"
-                  ? appointment.user?.name
-                  : appointment.doctor?.name}
+                  ? appointment.userName
+                  : appointment.doctorName}
               </p>
-              <p><strong>Date:</strong> {appointment.date}</p>
-              <p><strong>Time:</strong> {appointment.time}</p>
+              <p>
+                <strong>Date:</strong> {appointment.date}
+              </p>
+              <p>
+                <strong>Time:</strong> {appointment.time}
+              </p>
               <p className="text-gray-500 text-sm">
                 Booked on: {new Date(appointment.createdAt).toLocaleString()}
               </p>
-              <p className={`mt-2 text-sm font-medium ${upcoming ? "text-green-600" : "text-red-600"}`}>
+              <p
+                className={`mt-2 text-sm font-medium ${
+                  upcoming ? "text-green-600" : "text-red-600"
+                }`}
+              >
                 {upcoming ? "Upcoming" : "Expired"}
               </p>
             </div>
